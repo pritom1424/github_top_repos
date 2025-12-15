@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_top_repos/core/constants/app_constatnts.dart';
 import 'package:github_top_repos/core/constants/app_file_paths.dart';
 import 'package:github_top_repos/features/repositories/controllers/repo_controller.dart';
 import 'package:github_top_repos/features/repositories/ui/pages/repo_details_page.dart';
@@ -119,7 +120,8 @@ class _RepoListPageState extends ConsumerState<RepoListPage> {
           },
         ),
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (err, _) => Center(child: Text('Error: $err')),
+        error: (err, _) =>
+            Center(child: Text(AppConstatnts.NO_INTERNET_CONNECTION)),
       ),
     );
   }

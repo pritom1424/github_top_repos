@@ -1,11 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:github_top_repos/features/repositories/models/github_repository.dart';
 import 'package:github_top_repos/features/repositories/ui/widgets/description_section.dart';
 import 'package:github_top_repos/features/repositories/ui/widgets/header_section.dart';
 import 'package:github_top_repos/features/repositories/ui/widgets/info_row.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../models/github_repository.dart';
 import 'package:intl/intl.dart';
 
 class RepoDetailsPage extends StatelessWidget {
