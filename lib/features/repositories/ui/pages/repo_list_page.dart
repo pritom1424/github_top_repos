@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_top_repos/core/constants/app_file_paths.dart';
 import 'package:github_top_repos/features/repositories/controllers/repo_controller.dart';
 import 'package:github_top_repos/features/repositories/ui/pages/repo_details_page.dart';
 
@@ -41,7 +42,7 @@ class _RepoListPageState extends ConsumerState<RepoListPage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/icon/icon.png', scale: 14),
+            Image.asset(AppFilePaths.iconPath, scale: 14),
             const SizedBox(width: 5),
             const Text('Repositories'),
           ],

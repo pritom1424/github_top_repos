@@ -28,7 +28,6 @@ class RepoController extends AsyncNotifier<List<GitHubRepository>> {
 
   @override
   Future<List<GitHubRepository>> build() async {
-    // Load persisted sort choice
     currentSort = await _localStorage.getSortOption();
     final cached = await _localStorage.getRepositories();
     if (cached.isNotEmpty) {
@@ -49,10 +48,12 @@ class RepoController extends AsyncNotifier<List<GitHubRepository>> {
   }
 
   Future<List<GitHubRepository>> loadMore() async {
-    if (!hasMore || isLoadingMore) return allRepos;
+    if (!hasMore || isLoadingMore) {
+      return allRepos;
+    }
     isLoadingMore = true;
     _currentPage++;
-    final newRepos = await _fetchFromApi(page: _currentPage);
+    await _fetchFromApi(page: _currentPage);
     isLoadingMore = false;
     return allRepos;
   }

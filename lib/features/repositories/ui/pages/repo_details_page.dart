@@ -19,7 +19,7 @@ class RepoDetailsPage extends StatelessWidget {
       'MM-dd-yyyy HH:mm',
     ).format(repository.updatedAt);
 
-    Future<void> _launchInAppWithBrowserOptions(Uri url) async {
+    Future<void> launchInAppWithBrowserOptions(Uri url) async {
       if (!await launchUrl(
         url,
         mode: LaunchMode.inAppBrowserView,
@@ -33,8 +33,7 @@ class RepoDetailsPage extends StatelessWidget {
       appBar: AppBar(title: Text("Repository Details")),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          // we will wire launchUrl later
-          _launchInAppWithBrowserOptions(Uri.parse(repository.repoUrl));
+          launchInAppWithBrowserOptions(Uri.parse(repository.repoUrl));
         },
         icon: const Icon(Icons.open_in_new),
         label: const Text('Open on GitHub'),

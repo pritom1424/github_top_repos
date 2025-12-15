@@ -5,8 +5,7 @@ class AppTheme {
     final base = ThemeData.light(useMaterial3: true);
     return base.copyWith(
       brightness: Brightness.light,
-
-      scaffoldBackgroundColor: const Color(0xFFF2F4F8), // soft off-white
+      scaffoldBackgroundColor: const Color(0xFFF2F4F8),
       colorScheme: ColorScheme.fromSeed(
         seedColor: const Color(0xFF2563EB),
         brightness: Brightness.light,

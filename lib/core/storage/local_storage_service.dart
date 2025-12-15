@@ -28,7 +28,9 @@ class LocalStorageService {
     final prefs = await SharedPreferences.getInstance();
     final jsonString = prefs.getString(_cachedReposKey);
 
-    if (jsonString == null) return [];
+    if (jsonString == null) {
+      return [];
+    }
 
     final list = jsonDecode(jsonString) as List;
     return list
