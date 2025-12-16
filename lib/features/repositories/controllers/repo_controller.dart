@@ -20,9 +20,9 @@ class RepoController extends AsyncNotifier<List<GitHubRepository>> {
   SortOption currentSort = SortOption.stars;
 
   int _currentPage = 1;
-  final int _perPage = 20;
-  bool hasMore = true;
+  final int _perPage = 10;
   bool isLoadingMore = false;
+  final int _total = 50;
 
   List<GitHubRepository> allRepos = [];
 
@@ -42,15 +42,16 @@ class RepoController extends AsyncNotifier<List<GitHubRepository>> {
   Future<List<GitHubRepository>> refresh() async {
     state = const AsyncValue.loading();
     _currentPage = 1;
-    hasMore = true;
+    isLoadingMore = false;
     allRepos.clear();
     return await _fetchFromApi();
   }
 
   Future<List<GitHubRepository>> loadMore() async {
-    if (!hasMore || isLoadingMore) {
+    if (allRepos.length > _total) {
       return allRepos;
     }
+
     isLoadingMore = true;
     _currentPage++;
     await _fetchFromApi(page: _currentPage);
@@ -66,20 +67,15 @@ class RepoController extends AsyncNotifier<List<GitHubRepository>> {
         perPage: _perPage,
       );
 
-      if (repos.isEmpty) {
-        hasMore = false;
-      }
-
       if (page == 1) {
         allRepos = repos;
       } else {
         allRepos.addAll(repos);
       }
 
-      // Save first page to local storage
-      if (page == 1) {
-        await _localStorage.saveRepositories(repos);
-      }
+      // Save loaded all page to local storage
+
+      await _localStorage.saveRepositories(allRepos);
 
       await sortRepositories(currentSort, list: allRepos);
 

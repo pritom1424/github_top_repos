@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_top_repos/core/constants/app_constatnts.dart';
 import 'package:github_top_repos/core/constants/app_file_paths.dart';
+import 'package:github_top_repos/features/repositories/controllers/app_theme_controller.dart';
 import 'package:github_top_repos/features/repositories/controllers/repo_controller.dart';
 import 'package:github_top_repos/features/repositories/ui/pages/repo_details_page.dart';
 
@@ -43,15 +44,38 @@ class _RepoListPageState extends ConsumerState<RepoListPage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(AppFilePaths.iconPath, scale: 14),
-            const SizedBox(width: 5),
+            ClipRRect(
+              borderRadius: BorderRadiusGeometry.all(Radius.circular(20)),
+              child: Image.asset(AppFilePaths.iconPath, scale: 14),
+            ),
+            const SizedBox(width: 10),
             const Text('Repositories'),
           ],
         ),
         elevation: 2,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        foregroundColor: Theme.of(context).colorScheme.surface,
+        /*    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        foregroundColor: Theme.of(context).colorScheme.surface, */
         actions: [
+          Consumer(
+            builder: (context, ref, _) {
+              final themeMode = ref.watch(appThemeProvider);
+
+              return IconButton(
+                tooltip: themeMode == ThemeMode.dark
+                    ? 'Switch to Light Mode'
+                    : 'Switch to Dark Mode',
+                icon: Icon(
+                  themeMode == ThemeMode.dark
+                      ? Icons
+                            .light_mode // ☀️ Sun
+                      : Icons.dark_mode, // 🌙 Moon
+                ),
+                onPressed: () {
+                  ref.read(appThemeProvider.notifier).toggleTheme();
+                },
+              );
+            },
+          ),
           PopupMenuButton<SortOption>(
             icon: const Icon(Icons.sort),
             onSelected: (option) => ref
@@ -76,8 +100,10 @@ class _RepoListPageState extends ConsumerState<RepoListPage> {
           itemCount: repos.length + 1, // extra item for loading indicator
           itemBuilder: (context, index) {
             if (index == repos.length) {
-              final hasMore = ref.read(repoControllerProvider.notifier).hasMore;
-              return hasMore
+              final isLoadingMore = ref
+                  .read(repoControllerProvider.notifier)
+                  .isLoadingMore;
+              return isLoadingMore
                   ? const Padding(
                       padding: EdgeInsets.all(16),
                       child: Center(child: CircularProgressIndicator()),

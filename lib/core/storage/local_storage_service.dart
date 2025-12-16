@@ -7,6 +7,19 @@ class LocalStorageService {
   static const String _cachedReposKey = 'cached_repos';
   static const String _sortOptionKey = 'sort_option';
 
+  static const _themeKey = 'app_theme_mode';
+
+  Future<void> saveThemeMode(String modeString) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_themeKey, modeString);
+  }
+
+  Future<String> getThemeMode() async {
+    final prefs = await SharedPreferences.getInstance();
+    final stringMode = prefs.getString(_themeKey) ?? "light";
+    return stringMode;
+  }
+
   Future<void> saveSortOption(SortOption option) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(_sortOptionKey, option.index);
