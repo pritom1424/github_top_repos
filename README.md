@@ -82,14 +82,16 @@ All test files are located in the `/test` directory.
 ## 📸 Screenshots
 
 ### Home Screen
-<img src="assets/screenshots/gt_ss1.jpeg" alt="Home Screen" width="300"/>
+<img src="assets/screenshots/gt_ss1.jpg" alt="Home Screen" width="300"/>
 
 ### Sort Screen
-<img src="assets/screenshots/gt_ss2.jpeg" alt="Sort Screen" width="300"/>
+<img src="assets/screenshots/gt_ss3.jpg" alt="Sort Screen" width="300"/>
 
 ### Details Screen
-<img src="assets/screenshots/gt_ss3.jpeg" alt="Details Screen" width="300"/>
+<img src="assets/screenshots/gt_ss4.jpg" alt="Details Screen" width="300"/>
 
+### Dark Theme
+<img src="assets/screenshots/gt_ss2.jpg" alt="Details Screen" width="300"/>
 
 
 ---
